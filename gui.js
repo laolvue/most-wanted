@@ -30,3 +30,8 @@ function promptFor(question, valid){
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
+
+// helper function to pass in as default promptFor validation
+function chars(input){
+  return false; // default validation only
+}
