@@ -1,0 +1,20 @@
+{
+  "name": "most-wanted",
+  "version": "2.0.0",
+  "description": "Person searching tool.",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devCodeCamp/starter-most-wanted.git"
+  },
+  "keywords": [
+    "JavaScript"
+  ],
+  "author": "devCodeCamp",
+  "bugs": {
+    "url": "https://github.com/devCodeCamp/starter-most-wanted/issues"
+  },
+  "homepage": "https://github.com/devCodeCamp/starter-most-wanted#readme"
+}
