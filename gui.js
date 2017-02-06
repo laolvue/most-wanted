@@ -18,7 +18,13 @@ function app(people){
   }
 }
 
+function searchByName(people){
+  var firstName = promptFor("What is the person's first name?", chars);
+  var lastName = promptFor("What is the person's last name?", chars);
 
+  // TODO: find the person using the name they entered
+
+}
 
 // alerts a list of people
 function displayPeople(people){
