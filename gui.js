@@ -1,38 +1,24 @@
 /*
-  You do not need to modify this file. However, you may.
+  Build all of your functions for displaying and gathering information below (GUI).
 */
 
+// app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
-  var person;
   switch(searchType){
     case 'yes':
-      person = searchByName(people);
-      mainMenu(person, people);
+      // TODO: search by name
       break;
     case 'no':
-      person = searchByTraits(people);
-      mainMenu(person, people);
+      // TODO: search by traits
       break;
     default:
-      app(people);
+      app(people); // restart app
       break;
   }
 }
 
-function searchByName(people){
-
-}
-
-function searchByTraits(people){
-
-}
-
-function mainMenu(person, people){
-
-}
-
-
+// function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question);
@@ -40,6 +26,7 @@ function promptFor(question, valid){
   return response;
 }
 
+// helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
