@@ -3,7 +3,21 @@
 */
 
 function app(people){
-
+  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
+  var person;
+  switch(searchType){
+    case 'yes':
+      person = searchByName(people);
+      mainMenu(person, people);
+      break;
+    case 'no':
+      person = searchByTraits(people);
+      mainMenu(person, people);
+      break;
+    default:
+      app(people);
+      break;
+  }
 }
 
 function searchByName(people){
