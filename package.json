@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Person searching tool.",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/devCodeCamp/starter-most-wanted/issues"
   },
-  "homepage": "https://github.com/devCodeCamp/starter-most-wanted#readme"
+  "homepage": "https://github.com/devCodeCamp/starter-most-wanted#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
+  }
 }
