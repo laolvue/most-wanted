@@ -7,7 +7,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   switch(searchType){
     case 'yes':
-      // TODO: search by name
+      searchByName(people);// TODO: search by name
       break;
     case 'no':
       // TODO: search by traits
@@ -32,6 +32,7 @@ function mainMenu(person, people){
 
 	switch(displayOption){
 		case "info":
+			displayPerson(person);
 			// TODO: get person's info
 			break;
 		case "family":
@@ -53,23 +54,29 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
+  filterByName(firstName, lastName, people);
   // TODO: find the person using the name they entered
 
 }
-
+/*
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-
+*/
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
@@ -78,7 +85,7 @@ function displayPerson(person){
 function promptFor(question, valid){
   do{
     var response = prompt(question);
-  } while(!response || !valid(response));
+  } while(!response /*|| !valid(response)*/);
   return response;
 }
 
