@@ -18,6 +18,18 @@ function app(people){
   }
 }
 
+
+
+
+
+function displayPerson(person){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  var personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "Last Name: " + person.lastName + "\n";
+  alert(personInfo);
+}
+
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
