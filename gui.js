@@ -32,6 +32,7 @@ function mainMenu(person, people){
 
 	switch(displayOption){
 		case "info":
+			calculateAge(people);
 			displayPerson(person);
 			break;
 		case "family":

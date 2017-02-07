@@ -33,6 +33,17 @@ function filterByTraits(people, traits){
 	
 	
 }
+
+function calculateAge(people){
+	var peep=people;
+	for(var i=0;i<people.length;i++){
+		peep[i].age=(people[i].dob.split("/"));
+		peep[i].age=(2017- peep[i].age[2]);
+	}
+	
+	console.log(peep[0].age);
+	return (peep);
+}
 	
 
 	/*
