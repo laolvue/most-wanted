@@ -33,12 +33,13 @@ function mainMenu(person, people){
 	switch(displayOption){
 		case "info":
 			displayPerson(person);
-			// TODO: get person's info
 			break;
 		case "family":
+			getFamily(person,people);
 			// TODO: get person's family
 			break;
 		case "descendants":
+			console.log(getDescendants(person, people));
 			// TODO: get person's descendants
 			break;
 		case "restart":
@@ -77,7 +78,6 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-  // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
