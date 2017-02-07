@@ -10,7 +10,7 @@ function app(people){
       searchByName(people);// TODO: search by name
       break;
     case 'no':
-      // TODO: search by traits
+      searchByTraits(people);// TODO: search by traits
       break;
     default:
       app(people); // restart app
@@ -51,14 +51,32 @@ function mainMenu(person, people){
 			return mainMenu(person, people); // ask again
 	}
 }
-
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
   filterByName(firstName, lastName, people);
   // TODO: find the person using the name they entered
-
 }
+function searchByTraits(people){
+  var traits=[{
+				"age":"",
+				"height":"",
+				"weight":"",
+				"occupation":"",
+				"egeColor":""
+  }]
+			
+  traits.age = promptFor("Type the age of the person: ");
+  traits.height = promptFor("Type the height of the person in inches: ");
+  traits.weight = promptFor("Type the weight of the person: ");
+  traits.occupation = promptFor("Type the occupation of the person: ");
+  traits.eyeColor = promptFor("Type the eye color of the person: ");
+  filterByTraits(people,traits);
+  
+//  filterByName(firstName, lastName, people);
+  // TODO: find the person using the name they entered
+}
+
 /*
 // alerts a list of people
 function displayPeople(people){
@@ -67,6 +85,8 @@ function displayPeople(people){
   }).join("\n"));
 }
 */
+
+
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
