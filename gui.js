@@ -72,20 +72,21 @@ function searchByTraits(people){
   traits.weight = promptFor("Type the weight of the person: ");
   traits.occupation = promptFor("Type the occupation of the person: ");
   traits.eyeColor = promptFor("Type the eye color of the person: ");
-  filterByTraits(people,traits);
+  var peopleAgeAdded=calculateAge(people);
+  var teeth= filterByTraits(peopleAgeAdded,traits);
+  displayPeople(teeth);
   
 //  filterByName(firstName, lastName, people);
   // TODO: find the person using the name they entered
 }
 
-/*
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-*/
 
 
 function displayPerson(person){

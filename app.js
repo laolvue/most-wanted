@@ -26,12 +26,9 @@ function filterByName(firstName, lastName, people){
 
 function filterByTraits(people, traits){
 	var pop= people.filter(function(el){
-		return (el.dob === traits.age);
-		
+		return (el.age == traits.age||el.height == traits.height||el.weight == traits.weight||el.occupation == traits.occupation||el.eyeColor == traits.eyeColor);
 	});
-	console.log(pop);
-	
-	
+	return(pop);
 }
 
 function calculateAge(people){
@@ -40,8 +37,6 @@ function calculateAge(people){
 		peep[i].age=(people[i].dob.split("/"));
 		peep[i].age=(2017- peep[i].age[2]);
 	}
-	
-	console.log(peep[0].age);
 	return (peep);
 }
 	
