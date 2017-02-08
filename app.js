@@ -41,7 +41,6 @@ function filterByTraits(people, traits){
 		if(traits.eyeColor==0){
 			people[i].eyeColor=traits.eyeColor;
 		}
-		console.log(people[i].weight);
 	}
 		
 		
@@ -62,10 +61,6 @@ function calculateAge(people){
 
 
 function getFamily(person, people){
-	/*
-	var job= people.filter(function(el){
-		return(person.id==famil
-	});*/
 	var familyArray=[];
 	familyArray.parents=[];
 	if(!isNaN(person.currentSpouse)||!isNaN(person.parents)){
@@ -79,7 +74,12 @@ function getFamily(person, people){
 				if(person.parents[j]==people[i].id){
 					familyArray.parents[j] = people[i].firstName+" "+people[i].lastName;
 				}
-			}
+			}/*
+			for (var k=0;k<people.parents.length;k++){
+				if(person.id==people[i].parents[k]){
+					familyArray.childrens=people[i].firstName+" "+people[i].lastName;
+				}
+			}*/
 		}
 	}
 			

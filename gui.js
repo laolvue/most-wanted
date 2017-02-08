@@ -5,12 +5,14 @@
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
+  searchType=searchType.toLowerCase();
+  console.log(searchType);
   switch(searchType){
     case 'yes':
-      searchByName(people);// TODO: search by name
+      searchByName(people);
       break;
     case 'no':
-      searchByTraits(people);// TODO: search by traits
+      searchByTraits(people);
       break;
     default:
       app(people); // restart app
@@ -40,7 +42,6 @@ function mainMenu(person, people){
 			break;
 		case "descendants":
 			console.log(getDescendants(person, people));
-			// TODO: get person's descendants
 			break;
 		case "restart":
 			app(people); // restart
@@ -55,8 +56,8 @@ function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
   filterByName(firstName, lastName, people);
-  // TODO: find the person using the name they entered
 }
+
 function searchByTraits(people){
   var traits=[{
 				"age":"",
@@ -66,11 +67,11 @@ function searchByTraits(people){
 				"eyeColor":""
   }]
 			
-  traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ");
-  traits.height = promptFor("Type the height of the person in inches or press enter if you don't know: ");
-  traits.weight = promptFor("Type the weight of the person or press enter if you don't know: ");
-  traits.occupation = promptFor("Type the occupation of the person or press enter if you don't know: ");
-  traits.eyeColor = promptFor("Type the eye color of the person or press enter if you don't know: ");
+  traits.age = prompt("Type the age of the person or enter 0 if you don't know: ");
+  traits.height = prompt("Type the height of the person in inches or press enter if you don't know: ");
+  traits.weight = prompt("Type the weight of the person or press enter if you don't know: ");
+  traits.occupation = prompt("Type the occupation of the person or press enter if you don't know: ");
+  traits.eyeColor = prompt("Type the eye color of the person or press enter if you don't know: ");
   var peopleAgeAdded=calculateAge(people);
   var teeth= filterByTraits(peopleAgeAdded,traits);
   displayPeople(teeth);
@@ -106,7 +107,7 @@ function displayPerson(person){
 function promptFor(question, valid){
   do{
     var response = prompt(question);
-  } while(!response /*|| !valid(response)*/);
+  } while(!response || !valid(response));
   return response;
 }
 
@@ -117,5 +118,7 @@ function yesNo(input){
 
 // helper function to pass in as default promptFor validation
 function chars(input){
-  return false; // default validation only
-}
+	var str= /[0-9@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
+	var result = str.test(input);
+		return !result; // default validation only
+	}
