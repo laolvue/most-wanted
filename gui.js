@@ -11,7 +11,7 @@ function app(people){
       mainMenu(filterByName(searchByName(people)));
       break;
     case 'no':
-      searchByTraits(people);
+	  displayPeople(filterByTraits(searchByTraits(calculateAge(people))));
       break;
     default:
       app(people); // restart app
@@ -72,9 +72,10 @@ function searchByTraits(people){
   traits.weight = promptFor("Type the weight of the person or enter 0 if you don't know: ", numbers);
   traits.occupation = promptFor("Type the occupation of the person or enter 0 if you don't know: ", charsIncludeZero);
   traits.eyeColor = promptFor("Type the eye color of the person or enter 0 if you don't know: ", charsIncludeZero);
-  var peopleAgeAdded=calculateAge(people);
-  var teeth= filterByTraits(peopleAgeAdded,traits);
-  displayPeople(teeth);
+  var data=[];
+  data.people=people;
+  data.traits=traits;
+  return(data);
 }
 
 

@@ -28,39 +28,39 @@ function filterByName(nameArray){
 	// return an aray containing the people matching the name
 }
 
-function filterByTraits(people, traits){
-	for(var i=0;i<people.length;i++){
-		if(traits.age==0){
-			people[i].age=traits.age;
+function filterByTraits(data){
+	for(var i=0;i<data.people.length;i++){
+		if(data.traits.age==0){
+			data.people[i].age=data.traits.age;
 		}
-		if(traits.height==0){
-			people[i].height=traits.height;
+		if(data.traits.height==0){
+			data.people[i].height=data.traits.height;
 		}
-		if(traits.weight==0){
-			people[i].weight=traits.weight;
+		if(data.traits.weight==0){
+			data.people[i].weight=data.traits.weight;
 		}
-		if(traits.occupation==0){
-			people[i].occupation=traits.occupation;
+		if(data.traits.occupation==0){
+			data.people[i].occupation=data.traits.occupation;
 		}
-		if(traits.eyeColor==0){
-			people[i].eyeColor=traits.eyeColor;
+		if(data.traits.eyeColor==0){
+			data.people[i].eyeColor=data.traits.eyeColor;
 		}
 	}
 		
 		
-	var pop= people.filter(function(el){
-		return (el.age == traits.age && el.height == traits.height && el.weight == traits.weight && el.occupation == traits.occupation && el.eyeColor == traits.eyeColor);
+	var result= data.people.filter(function(el){
+		return (el.age == data.traits.age && el.height == data.traits.height && el.weight == data.traits.weight && el.occupation == data.traits.occupation && el.eyeColor == data.traits.eyeColor);
 	});
-	return(pop);
+	return(result);
 }
 
 function calculateAge(people){
-	var peep=people;
+	var ageOfPeople=people;
 	for(var i=0;i<people.length;i++){
-		peep[i].age=(people[i].dob.split("/"));
-		peep[i].age=(2017- peep[i].age[2]);
+		ageOfPeople[i].age=(people[i].dob.split("/"));
+		ageOfPeople[i].age=(2017- ageOfPeople[i].age[2]);
 	}
-	return (peep);
+	return (ageOfPeople);
 }
 
 
