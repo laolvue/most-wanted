@@ -36,8 +36,7 @@ function mainMenu(person, people){
 			displayPerson(person);
 			break;
 		case "family":
-			getFamily(person,people);
-			// TODO: get person's family
+			displayFamily(getFamily(person,people));
 			break;
 		case "descendants":
 			console.log(getDescendants(person, people));
@@ -67,14 +66,21 @@ function searchByTraits(people){
 				"egeColor":""
   }]
 			
-  traits.age = promptFor("Type the age of the person: ");
-  traits.height = promptFor("Type the height of the person in inches: ");
-  traits.weight = promptFor("Type the weight of the person: ");
-  traits.occupation = promptFor("Type the occupation of the person: ");
-  traits.eyeColor = promptFor("Type the eye color of the person: ");
+  traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ");
+  traits.height = promptFor("Type the height of the person in inches or press enter if you don't know: ");
+  traits.weight = promptFor("Type the weight of the person or press enter if you don't know: ");
+  traits.occupation = promptFor("Type the occupation of the person or press enter if you don't know: ");
+  traits.eyeColor = promptFor("Type the eye color of the person or press enter if you don't know: ");
+  var blank= traits.filter(function(el){
+	  return(el != 0);
+  });
+  
+  console.log(blank);
+  /*
+  
   var peopleAgeAdded=calculateAge(people);
   var teeth= filterByTraits(peopleAgeAdded,traits);
-  displayPeople(teeth);
+  displayPeople(teeth);*/
   
 //  filterByName(firstName, lastName, people);
   // TODO: find the person using the name they entered
@@ -88,6 +94,9 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+function displayFamily(people){
+  alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents);
+}
 
 function displayPerson(person){
   // print all of the information about a person:

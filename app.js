@@ -26,7 +26,7 @@ function filterByName(firstName, lastName, people){
 
 function filterByTraits(people, traits){
 	var pop= people.filter(function(el){
-		return (el.age == traits.age||el.height == traits.height||el.weight == traits.weight||el.occupation == traits.occupation||el.eyeColor == traits.eyeColor);
+		return (el.age == traits.age && el.height == traits.height && el.weight == traits.weight && el.occupation == traits.occupation && el.eyeColor == traits.eyeColor);
 	});
 	return(pop);
 }
@@ -39,31 +39,31 @@ function calculateAge(people){
 	}
 	return (peep);
 }
-	
-
-	/*
-	var array=[];
-	for(var i=0;i<people.length; i++){
-		people.filter(function(el){
-				if (el === traits.age){
-					console.log("hi");
-					array.push(people[i]);
-					
-				}
-			}
-			
-			
-		});*/
 
 
 function getFamily(person, people){
-/*	for(var i=0; i<people.length; i++){
-		if(lastName===people[i].lastName){
-			
-			
+	/*
+	var job= people.filter(function(el){
+		return(person.id==famil
+	});*/
+	var familyArray=[];
+	familyArray.parents=[];
+	if(!isNaN(person.currentSpouse)||!isNaN(person.parents)){
+		for(var i=0; i<people.length; i++){
+			if(person.currentSpouse==people[i].id){
+				familyArray.currentSpouse=people[i].firstName+" "+people[i].lastName;
+			}
+			for(var j=0;j<person.parents.length;j++){
+
+				familyArray.parents.length=person.parents.length;
+				if(person.parents[j]==people[i].id){
+					familyArray.parents[j] = people[i].firstName+" "+people[i].lastName;
+				}
+			}
 		}
 	}
-	*/
+			
+	return(familyArray);
 	// return an array containing the family members (objects)
 }
 
