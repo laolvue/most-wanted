@@ -6,10 +6,9 @@
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   searchType=searchType.toLowerCase();
-  console.log(searchType);
   switch(searchType){
     case 'yes':
-      searchByName(people);
+      mainMenu(filterByName(searchByName(people)));
       break;
     case 'no':
       searchByTraits(people);
@@ -21,27 +20,26 @@ function app(people){
 }
 
 // Menu function to call once you find who you are looking for
-function mainMenu(person, people){
+function mainMenu(data){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(!person){
+  if(!data.person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(data.people); // restart
   }
 
-	var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+	var displayOption = prompt("Found " + data.person.firstName + " " + data.person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
 	switch(displayOption){
 		case "info":
-			calculateAge(people);
-			displayPerson(person);
+			displayPerson(data.person);
 			break;
 		case "family":
-			displayFamily(getFamily(person,people));
+			displayFamily(getFamily(data.person,data.people));
 			break;
 		case "descendants":
-			console.log(getDescendants(person, people));
+			displayDescendants(getDescendants(data.person, data.people));
 			break;
 		case "restart":
 			app(people); // restart
@@ -53,9 +51,11 @@ function mainMenu(person, people){
 	}
 }
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
-  filterByName(firstName, lastName, people);
+  var nameArray = [];
+  nameArray.firstName = promptFor("What is the person's first name?", chars);
+  nameArray.lastName = promptFor("What is the person's last name?", chars);
+  nameArray.people=people;
+  return(nameArray);
 }
 
 function searchByTraits(people){
@@ -67,11 +67,11 @@ function searchByTraits(people){
 				"eyeColor":""
   }]
 			
-  traits.age = prompt("Type the age of the person or enter 0 if you don't know: ");
-  traits.height = prompt("Type the height of the person in inches or press enter if you don't know: ");
-  traits.weight = prompt("Type the weight of the person or press enter if you don't know: ");
-  traits.occupation = prompt("Type the occupation of the person or press enter if you don't know: ");
-  traits.eyeColor = prompt("Type the eye color of the person or press enter if you don't know: ");
+  traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ", numbers);
+  traits.height = promptFor("Type the height of the person in inches or enter 0 if you don't know: ", numbers);
+  traits.weight = promptFor("Type the weight of the person or enter 0 if you don't know: ", numbers);
+  traits.occupation = promptFor("Type the occupation of the person or enter 0 if you don't know: ", charsIncludeZero);
+  traits.eyeColor = promptFor("Type the eye color of the person or enter 0 if you don't know: ", charsIncludeZero);
   var peopleAgeAdded=calculateAge(people);
   var teeth= filterByTraits(peopleAgeAdded,traits);
   displayPeople(teeth);
@@ -87,6 +87,10 @@ function displayPeople(people){
 
 function displayFamily(people){
   alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents+"\n\n"+"Children: "+people.children);
+}
+
+function displayDescendants(people){
+  alert("Descendants: "+people);
 }
 
 function displayPerson(person){
@@ -120,5 +124,17 @@ function yesNo(input){
 function chars(input){
 	var str= /[0-9@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
 	var result = str.test(input);
-		return !result; // default validation only
-	}
+		return !result; 
+}
+
+function charsIncludeZero(input){
+	var str= /[1-9@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
+	var result = str.test(input);
+		return !result;
+}
+
+function numbers(input){
+	var str= /[a-zA-Z@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
+	var result = str.test(input);
+		return !result;
+}

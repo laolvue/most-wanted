@@ -3,23 +3,27 @@
 	Some functions have been stubbed out.
 */
 
-function filterByName(firstName, lastName, people){
-
+function filterByName(nameArray){
 	var j=0;
-	for( var i=0; i<people.length; i++){
-		if(firstName===people[i].firstName && lastName===people[i].lastName){
+	
+	for( var i=0; i<nameArray.people.length; i++){
+		if(nameArray.firstName===nameArray.people[i].firstName && nameArray.lastName===nameArray.people[i].lastName){
 				j++;
 				break;
 		}
 	}
-	
+	var result = [];
 	if(j>0)
 	{
-		mainMenu(people[i],people);
+		result.person=nameArray.people[i];
+		result.people=nameArray.people;
+		return(result);
 	}
 	else if (j===0)
 	{
-		mainMenu(0,people);
+		result.person=0;
+		result.people=nameArray.people;
+		return(result);
 	}
 	// return an aray containing the people matching the name
 }
@@ -95,7 +99,7 @@ function getDescendants(person, people,pop=[],x=0){
 	else if(x<people.length){
 		for(i=0;i<people[x].parents.length;i++){
 			if (person.id===people[x].parents[i]){
-				pop = pop +"\n"+people[x].firstName+" "+people[x].lastName+"\n";
+				pop = pop +"\n"+people[x].firstName+" "+people[x].lastName;
 			}
 		}
 		x++;
