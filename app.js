@@ -63,23 +63,23 @@ function calculateAge(people){
 function getFamily(person, people){
 	var familyArray=[];
 	familyArray.parents=[];
+	familyArray.children=[];
 	if(!isNaN(person.currentSpouse)||!isNaN(person.parents)){
 		for(var i=0; i<people.length; i++){
 			if(person.currentSpouse==people[i].id){
 				familyArray.currentSpouse=people[i].firstName+" "+people[i].lastName;
 			}
 			for(var j=0;j<person.parents.length;j++){
-
 				familyArray.parents.length=person.parents.length;
 				if(person.parents[j]==people[i].id){
 					familyArray.parents[j] = people[i].firstName+" "+people[i].lastName;
 				}
-			}/*
-			for (var k=0;k<people.parents.length;k++){
+			}
+			for (var k=0;k<people[i].parents.length;k++){
 				if(person.id==people[i].parents[k]){
-					familyArray.childrens=people[i].firstName+" "+people[i].lastName;
+					familyArray.children = people[i].firstName+" "+people[i].lastName;
 				}
-			}*/
+			}
 		}
 	}
 			

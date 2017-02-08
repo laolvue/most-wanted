@@ -86,7 +86,7 @@ function displayPeople(people){
 }
 
 function displayFamily(people){
-  alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents);
+  alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents+"\n\n"+"Children: "+people.children);
 }
 
 function displayPerson(person){
