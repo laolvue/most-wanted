@@ -25,6 +25,26 @@ function filterByName(firstName, lastName, people){
 }
 
 function filterByTraits(people, traits){
+	for(var i=0;i<people.length;i++){
+		if(traits.age==0){
+			people[i].age=traits.age;
+		}
+		if(traits.height==0){
+			people[i].height=traits.height;
+		}
+		if(traits.weight==0){
+			people[i].weight=traits.weight;
+		}
+		if(traits.occupation==0){
+			people[i].occupation=traits.occupation;
+		}
+		if(traits.eyeColor==0){
+			people[i].eyeColor=traits.eyeColor;
+		}
+		console.log(people[i].weight);
+	}
+		
+		
 	var pop= people.filter(function(el){
 		return (el.age == traits.age && el.height == traits.height && el.weight == traits.weight && el.occupation == traits.occupation && el.eyeColor == traits.eyeColor);
 	});

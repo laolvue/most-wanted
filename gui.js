@@ -63,7 +63,7 @@ function searchByTraits(people){
 				"height":"",
 				"weight":"",
 				"occupation":"",
-				"egeColor":""
+				"eyeColor":""
   }]
 			
   traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ");
@@ -71,19 +71,9 @@ function searchByTraits(people){
   traits.weight = promptFor("Type the weight of the person or press enter if you don't know: ");
   traits.occupation = promptFor("Type the occupation of the person or press enter if you don't know: ");
   traits.eyeColor = promptFor("Type the eye color of the person or press enter if you don't know: ");
-  var blank= traits.filter(function(el){
-	  return(el != 0);
-  });
-  
-  console.log(blank);
-  /*
-  
   var peopleAgeAdded=calculateAge(people);
   var teeth= filterByTraits(peopleAgeAdded,traits);
-  displayPeople(teeth);*/
-  
-//  filterByName(firstName, lastName, people);
-  // TODO: find the person using the name they entered
+  displayPeople(teeth);
 }
 
 
