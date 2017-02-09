@@ -6,18 +6,23 @@
 
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
-  searchType=searchType.toLowerCase();
-  switch(searchType){
+  switch(makeLowerCase(searchType)){
     case 'yes':
-      mainMenu(filterByName(searchByName(people)));
+      mainMenu(filterByName(searchByName(people)));//send user to search by name
       break;
     case 'no':
-	  displayPeople(filterByTraits(searchByTraits(calculateAge(people))));
+	  displayPeople(filterByTraits(searchByTraits(calculateAge(people))));//send user to search by traits
       break;
     default:
       app(people); // restart app
       break;
   }
+}
+
+//makes input lowercase
+function makeLowerCase(input){
+	input=input.toLowerCase();
+	return input;
 }
 
 // Menu function to call once you find who you are looking for
@@ -52,6 +57,7 @@ function mainMenu(dataArray){
 	}
 }
 
+//return an array containing first name, last name, and data
 function searchByName(people){
   var nameArray = [];
   var cloneOfPeople=[];
@@ -61,6 +67,7 @@ function searchByName(people){
   return(nameArray);
 }
 
+//return an array containing traits inputted by user and data
 function searchByTraits(people){
   var traits=[];
   traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ", numbers);
@@ -82,10 +89,12 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+//alerts the family of person
 function displayFamily(people){
   alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents+"\n\n"+"Children: "+people.children);
 }
 
+//alerts descendants of person
 function displayDescendants(people){
   alert("Descendants: "+people);
 }
@@ -117,7 +126,7 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-// helper function to pass in as default promptFor validation
+// helper functions to pass in as default promptFor validation
 function chars(input){
 	var str= /[0-9@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
 	var result = str.test(input);

@@ -3,6 +3,8 @@
 	Some functions have been stubbed out.
 */
 
+
+// return an aray containing the people matching the name
 function filterByName(nameArray){
 	var j=0;
 	for( var i=0; i<nameArray.people.length; i++){
@@ -24,11 +26,11 @@ function filterByName(nameArray){
 		result.people=nameArray.people;
 		return(result);
 	}
-	// return an aray containing the people matching the name
 }
 
+//returns an array containing the persons matching traits inputted by the user; USED .Filter
 function filterByTraits(dataList){
-	var cloneOfDataList= JSON.parse(JSON.stringify(dataList.people));
+	var cloneOfDataList= JSON.parse(JSON.stringify(dataList.people)); //makes a hard copy of array
 	for(var i=0;i<cloneOfDataList.length;i++){
 		if(dataList.traits.age==0){
 			cloneOfDataList[i].age=dataList.traits.age;
@@ -52,6 +54,7 @@ function filterByTraits(dataList){
 	return(result);
 }
 
+//function to calculate the age of a person given their DOB
 function calculateAge(people){
 	var cloneOfPeople = JSON.parse(JSON.stringify(people));
 	for(var i=0;i<people.length;i++){
@@ -61,7 +64,7 @@ function calculateAge(people){
 	return (cloneOfPeople);
 }
 
-
+// return an array containing the family members (objects); USED Iteration
 function getFamily(person, people){
 	var familyArray=[];
 	familyArray.parents=[];
@@ -86,9 +89,9 @@ function getFamily(person, people){
 	}
 			
 	return(familyArray);
-	// return an array containing the family members (objects)
 }
 
+//return an array containing descendants of person; USED RECURSION
 function getDescendants(person, people,descendants=[],x=0){
 	if(x==people.length){
 		return(descendants);
