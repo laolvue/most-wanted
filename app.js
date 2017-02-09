@@ -9,8 +9,8 @@ function filterByName(nameArray){
 	var j=0;
 	for( var i=0; i<nameArray.people.length; i++){
 		if(nameArray.firstName===nameArray.cloneOfPeople[i].firstName && nameArray.lastName===nameArray.cloneOfPeople[i].lastName){
-				j++;
-				break;
+			j++;
+			break;
 		}
 	}
 	var result = [];
@@ -70,22 +70,37 @@ function getFamily(person, people){
 	familyArray.currentSpouse=[];
 	familyArray.parents=[];
 	familyArray.children=[];
+	familyArray.siblings=[];
 	for(var i=0; i<people.length; i++){
+		var d=0;
 		if(person.currentSpouse==people[i].id){
-			familyArray.currentSpouse= familyArray.currentSpouse+people[i].firstName+" "+people[i].lastName+"\n";
+			familyArray.currentSpouse= familyArray.currentSpouse +people[i].firstName+" "+people[i].lastName+"\n";
 		}
 		for(var j=0;j<person.parents.length;j++){
 			familyArray.parents.length=person.parents.length;
 			if(person.parents[j]==people[i].id){
-				familyArray.parents[j] = familyArray.parents[j]+people[i].firstName+" "+people[i].lastName+"\n";
+				familyArray.parents = familyArray.parents +people[i].firstName+" "+people[i].lastName+"\n";
 			}
 		}
 		for (var k=0;k<people[i].parents.length;k++){
 			if(person.id==people[i].parents[k]){
-				familyArray.children = familyArray.children+ people[i].firstName+" "+people[i].lastName+"\n";
+			familyArray.children = familyArray.children + people[i].firstName+" "+people[i].lastName+"\n";
+			}
+		}
+		for (var m=0; m<person.parents.length; m++){
+			if (d>0){
+				break;
+			}
+			for (var l=0;l<people[i].parents.length;l++){
+				if(person.parents[m]==people[i].parents[l] && person.id!=people[i].id){
+					familyArray.siblings = familyArray.siblings + people[i].firstName+" "+people[i].lastName+"\n";
+					d++;
+					break;
+				}
 			}
 		}
 	}
+	familyArray.parents=familyArray.parents.slice(1,familyArray.parents.length+1);//gets rid of comma before listing parents
 	return(familyArray);
 }
 
@@ -94,15 +109,14 @@ function getDescendants(person, people, descendants=[], k=0){
 	var p=0;
 	for(var i=0;i<people.length;i++){
 		for(var j=0; j<=people[i].parents.length; j++){
-				if (person[k].id === people[i].parents[j]){
-				
-					descendants= descendants+people[i].firstName+" "+people[i].lastName+"\n";
-					person.push(people[i]);
-					p++;
-				}
-				if (k<person.length-1){
-					p++;
-				}
+			if (person[k].id === people[i].parents[j]){
+				descendants= descendants+people[i].firstName+" "+people[i].lastName+"\n";
+				person.push(people[i]);
+				p++;
+			}
+			if (k<person.length-1){
+				p++;
+			}
 		}
 	}
 	

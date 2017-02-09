@@ -87,7 +87,7 @@ function displayPeople(people){
 
 //alerts the family of person
 function displayFamily(people){
-  alert("Current Spouse:\n"+people.currentSpouse +"\n\n"+"Parents:\n"+people.parents+"\n\n"+"Children:\n"+people.children);
+  alert("Current Spouse:\n"+people.currentSpouse +"\n\n"+"Parents:\n"+people.parents+"\n\n"+"Children:\n"+people.children+"\n\n"+"Siblings:\n"+people.siblings);
 }
 
 //alerts descendants of person
