@@ -5,7 +5,6 @@
 
 function filterByName(nameArray){
 	var j=0;
-	
 	for( var i=0; i<nameArray.people.length; i++){
 		if(nameArray.firstName===nameArray.people[i].firstName && nameArray.lastName===nameArray.people[i].lastName){
 				j++;
@@ -28,39 +27,38 @@ function filterByName(nameArray){
 	// return an aray containing the people matching the name
 }
 
-function filterByTraits(data){
-	for(var i=0;i<data.people.length;i++){
-		if(data.traits.age==0){
-			data.people[i].age=data.traits.age;
+function filterByTraits(dataList){
+	var cloneOfDataList= JSON.parse(JSON.stringify(dataList.people));
+	for(var i=0;i<cloneOfDataList.length;i++){
+		if(dataList.traits.age==0){
+			cloneOfDataList[i].age=dataList.traits.age;
 		}
-		if(data.traits.height==0){
-			data.people[i].height=data.traits.height;
+		if(dataList.traits.height== 0){
+			cloneOfDataList[i].height=dataList.traits.height;
 		}
-		if(data.traits.weight==0){
-			data.people[i].weight=data.traits.weight;
+		if(dataList.traits.weight==0){
+			cloneOfDataList[i].weight=dataList.traits.weight;
 		}
-		if(data.traits.occupation==0){
-			data.people[i].occupation=data.traits.occupation;
+		if(dataList.traits.occupation==0){
+			cloneOfDataList[i].occupation=dataList.traits.occupation;
 		}
-		if(data.traits.eyeColor==0){
-			data.people[i].eyeColor=data.traits.eyeColor;
+		if(dataList.traits.eyeColor==0){
+			cloneOfDataList[i].eyeColor=dataList.traits.eyeColor;
 		}
 	}
-		
-		
-	var result= data.people.filter(function(el){
-		return (el.age == data.traits.age && el.height == data.traits.height && el.weight == data.traits.weight && el.occupation == data.traits.occupation && el.eyeColor == data.traits.eyeColor);
+	var result= cloneOfDataList.filter(function(el){
+		return (el.age == dataList.traits.age && el.height == dataList.traits.height && el.weight == dataList.traits.weight && el.occupation == dataList.traits.occupation && el.eyeColor == dataList.traits.eyeColor);
 	});
 	return(result);
 }
 
 function calculateAge(people){
-	var ageOfPeople=people;
+	var cloneOfPeople = JSON.parse(JSON.stringify(people));
 	for(var i=0;i<people.length;i++){
-		ageOfPeople[i].age=(people[i].dob.split("/"));
-		ageOfPeople[i].age=(2017- ageOfPeople[i].age[2]);
+		cloneOfPeople[i].age=(people[i].dob.split("/"));
+		cloneOfPeople[i].age=(2017- cloneOfPeople[i].age[2]);
 	}
-	return (ageOfPeople);
+	return (cloneOfPeople);
 }
 
 
@@ -91,18 +89,18 @@ function getFamily(person, people){
 	// return an array containing the family members (objects)
 }
 
-function getDescendants(person, people,pop=[],x=0){
+function getDescendants(person, people,descendants=[],x=0){
 	if(x==people.length){
-		return(pop);
+		return(descendants);
 	}
 	
 	else if(x<people.length){
 		for(i=0;i<people[x].parents.length;i++){
 			if (person.id===people[x].parents[i]){
-				pop = pop +"\n"+people[x].firstName+" "+people[x].lastName;
+				descendants = descendants +"\n"+people[x].firstName+" "+people[x].lastName;
 			}
 		}
 		x++;
-		return getDescendants(person, people, pop,x);
+		return getDescendants(person, people, descendants,x);
 	}
 }
