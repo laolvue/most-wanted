@@ -8,7 +8,7 @@
 function filterByName(nameArray){
 	var j=0;
 	for( var i=0; i<nameArray.people.length; i++){
-		if(nameArray.firstName===nameArray.people[i].firstName && nameArray.lastName===nameArray.people[i].lastName){
+		if(nameArray.firstName===nameArray.cloneOfPeople[i].firstName && nameArray.lastName===nameArray.cloneOfPeople[i].lastName){
 				j++;
 				break;
 		}
@@ -28,7 +28,7 @@ function filterByName(nameArray){
 	}
 }
 
-//returns an array containing the persons matching traits inputted by the user; USED .Filter
+//returns an array containing the persons matching traits inputted by the user; USED .filter
 function filterByTraits(dataList){
 	var cloneOfDataList= JSON.parse(JSON.stringify(dataList.people)); //makes a hard copy of array
 	for(var i=0;i<cloneOfDataList.length;i++){
@@ -67,43 +67,51 @@ function calculateAge(people){
 // return an array containing the family members (objects); USED Iteration
 function getFamily(person, people){
 	var familyArray=[];
+	familyArray.currentSpouse=[];
 	familyArray.parents=[];
 	familyArray.children=[];
-	if(!isNaN(person.currentSpouse)||!isNaN(person.parents)){
-		for(var i=0; i<people.length; i++){
-			if(person.currentSpouse==people[i].id){
-				familyArray.currentSpouse=people[i].firstName+" "+people[i].lastName;
+	for(var i=0; i<people.length; i++){
+		if(person.currentSpouse==people[i].id){
+			familyArray.currentSpouse= familyArray.currentSpouse+people[i].firstName+" "+people[i].lastName+"\n";
+		}
+		for(var j=0;j<person.parents.length;j++){
+			familyArray.parents.length=person.parents.length;
+			if(person.parents[j]==people[i].id){
+				familyArray.parents[j] = familyArray.parents[j]+people[i].firstName+" "+people[i].lastName+"\n";
 			}
-			for(var j=0;j<person.parents.length;j++){
-				familyArray.parents.length=person.parents.length;
-				if(person.parents[j]==people[i].id){
-					familyArray.parents[j] = people[i].firstName+" "+people[i].lastName;
-				}
-			}
-			for (var k=0;k<people[i].parents.length;k++){
-				if(person.id==people[i].parents[k]){
-					familyArray.children = people[i].firstName+" "+people[i].lastName;
-				}
+		}
+		for (var k=0;k<people[i].parents.length;k++){
+			if(person.id==people[i].parents[k]){
+				familyArray.children = familyArray.children+ people[i].firstName+" "+people[i].lastName+"\n";
 			}
 		}
 	}
-			
 	return(familyArray);
 }
 
 //return an array containing descendants of person; USED RECURSION
-function getDescendants(person, people,descendants=[],x=0){
-	if(x==people.length){
-		return(descendants);
+function getDescendants(person, people, descendants=[], k=0){
+	var p=0;
+	for(var i=0;i<people.length;i++){
+		for(var j=0; j<=people[i].parents.length; j++){
+				if (person[k].id === people[i].parents[j]){
+				
+					descendants= descendants+people[i].firstName+" "+people[i].lastName+"\n";
+					person.push(people[i]);
+					console.log(person);
+					p++;
+				}
+				if (k<person.length-1){
+					p++;
+				}
+		}
 	}
 	
-	else if(x<people.length){
-		for(i=0;i<people[x].parents.length;i++){
-			if (person.id===people[x].parents[i]){
-				descendants = descendants +"\n"+people[x].firstName+" "+people[x].lastName;
-			}
-		}
-		x++;
-		return getDescendants(person, people, descendants,x);
+	if(p==0){
+		return (descendants);
+	}
+	else if(p>0){
+		k++;
+	return getDescendants(person, people, descendants,k);
 	}
 }

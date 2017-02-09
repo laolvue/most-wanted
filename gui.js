@@ -8,7 +8,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   switch(makeLowerCase(searchType)){
     case 'yes':
-      mainMenu(filterByName(searchByName(people)));//send user to search by name
+      mainMenu(filterByName(searchByName(makePeopleLowerCase(cloneArray(people)),people)));//send user to search by name
       break;
     case 'no':
 	  displayPeople(filterByTraits(searchByTraits(calculateAge(people))));//send user to search by traits
@@ -17,12 +17,6 @@ function app(people){
       app(people); // restart app
       break;
   }
-}
-
-//makes input lowercase
-function makeLowerCase(input){
-	input=input.toLowerCase();
-	return input;
 }
 
 // Menu function to call once you find who you are looking for
@@ -45,7 +39,9 @@ function mainMenu(dataArray){
 			displayFamily(getFamily(dataArray.person,dataArray.people));
 			break;
 		case "descendants":
-			displayDescendants(getDescendants(dataArray.person, dataArray.people));
+			var boop=[];
+			boop[0]=dataArray.person;
+			displayDescendants(getDescendants(boop, dataArray.people));
 			break;
 		case "restart":
 			app(dataArray.people); // restart
@@ -58,11 +54,11 @@ function mainMenu(dataArray){
 }
 
 //return an array containing first name, last name, and data
-function searchByName(people){
+function searchByName(cloneOfPeople,people){
   var nameArray = [];
-  var cloneOfPeople=[];
-  nameArray.firstName = promptFor("What is the person's first name?", chars);
-  nameArray.lastName = promptFor("What is the person's last name?", chars);
+  nameArray.firstName = makeLowerCase(promptFor("What is the person's first name?", chars));
+  nameArray.lastName = makeLowerCase(promptFor("What is the person's last name?", chars));
+  nameArray.cloneOfPeople = cloneOfPeople;
   nameArray.people = people;
   return(nameArray);
 }
@@ -82,7 +78,7 @@ function searchByTraits(people){
 }
 
 
-// alerts a list of people
+// alerts a list of people; used .map
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -91,12 +87,12 @@ function displayPeople(people){
 
 //alerts the family of person
 function displayFamily(people){
-  alert("Current Spouse: "+people.currentSpouse +"\n\n"+"Parents: "+people.parents+"\n\n"+"Children: "+people.children);
+  alert("Current Spouse:\n"+people.currentSpouse +"\n\n"+"Parents:\n"+people.parents+"\n\n"+"Children:\n"+people.children);
 }
 
 //alerts descendants of person
 function displayDescendants(people){
-  alert("Descendants: "+people);
+  alert("Descendants:\n"+people);
 }
 
 function displayPerson(person){
@@ -143,4 +139,25 @@ function numbers(input){
 	var str= /[a-zA-Z@!#$%^&*()`~=+_{}\-\/\\;:'".,?*<>]/;
 	var result = str.test(input);
 		return !result;
+}
+
+//makes input lowercase
+function makeLowerCase(input){
+	input=input.toLowerCase();
+	return input;
+}
+
+//clones an array and returns new array
+function cloneArray(array){
+	var cloneOfArray= JSON.parse(JSON.stringify(array));
+	return cloneOfArray;
+}
+
+//makes firstNames & lastNames into lowercase
+function makePeopleLowerCase(input){
+	for(var i=0; i<input.length; i++){
+		input[i].firstName=input[i].firstName.toLowerCase();
+		input[i].lastName=input[i].lastName.toLowerCase();
+	}
+	return input;
 }
