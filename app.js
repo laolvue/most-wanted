@@ -98,7 +98,6 @@ function getDescendants(person, people, descendants=[], k=0){
 				
 					descendants= descendants+people[i].firstName+" "+people[i].lastName+"\n";
 					person.push(people[i]);
-					console.log(person);
 					p++;
 				}
 				if (k<person.length-1){
@@ -112,6 +111,6 @@ function getDescendants(person, people, descendants=[], k=0){
 	}
 	else if(p>0){
 		k++;
-	return getDescendants(person, people, descendants,k);
+		return getDescendants(person, people, descendants,k);
 	}
 }
