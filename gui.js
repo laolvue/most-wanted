@@ -19,6 +19,7 @@ function app(people){
   }
 }
 
+
 // Menu function to call once you find who you are looking for
 function mainMenu(dataArray){
 
@@ -33,15 +34,15 @@ function mainMenu(dataArray){
 
 	switch(displayOption){
 		case "info":
-			displayPerson(dataArray.person);
+			displayPerson(dataArray.person);//display info
 			break;
 		case "family":
-			displayFamily(getFamily(dataArray.person,dataArray.people));
+			displayFamily(getFamily(dataArray.person,dataArray.people));//display family
 			break;
 		case "descendants":
-			var boop=[];
-			boop[0]=dataArray.person;
-			displayDescendants(getDescendants(boop, dataArray.people));
+			var copyPerson=[];
+			copyPerson[0]=dataArray.person;
+			displayDescendants(getDescendants(copyPerson, dataArray.people));//display descendants
 			break;
 		case "restart":
 			app(dataArray.people); // restart
@@ -66,12 +67,12 @@ function searchByName(cloneOfPeople,people){
 //return an array containing traits inputted by user and data
 function searchByTraits(people){
   var traits=[];
+  var dataList=[];
   traits.age = promptFor("Type the age of the person or enter 0 if you don't know: ", numbers);
   traits.height = promptFor("Type the height of the person in inches or enter 0 if you don't know: ", numbers);
   traits.weight = promptFor("Type the weight of the person or enter 0 if you don't know: ", numbers);
   traits.occupation = promptFor("Type the occupation of the person or enter 0 if you don't know: ", charsIncludeZero);
   traits.eyeColor = promptFor("Type the eye color of the person or enter 0 if you don't know: ", charsIncludeZero);
-  var dataList=[];
   dataList.people=people;
   dataList.traits=traits;
   return(dataList);
